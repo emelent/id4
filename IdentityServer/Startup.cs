@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,13 @@ namespace IdentityServer
 				.AddInMemoryClients(Config.Clients)
 				.AddTestUsers(TestUsers.Users);
 
+			services.AddAuthentication()
+				.AddGoogle("Google", options =>
+				{
+					options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+					options.ClientId = "85382615635-32iccpnnt663ecd2r2s338c4nohlfgul.apps.googleusercontent.com";
+					options.ClientSecret = "RGa3lWvgFy_chGB6L6JM794L";
+				});
 			// not recommended for production - you need to store your key material somewhere secure
 			builder.AddDeveloperSigningCredential();
 		}
