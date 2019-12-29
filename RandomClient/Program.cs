@@ -32,7 +32,7 @@ namespace RandomClient
 				throw new Exception(tokenResponse.Error);
 			}
 
-			// Console.WriteLine(tokenResponse.Json);
+			Console.WriteLine(tokenResponse.Json);
 			return tokenResponse;
 		}
 		static async Task Main(string[] args)
