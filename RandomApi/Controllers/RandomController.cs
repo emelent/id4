@@ -8,7 +8,7 @@ namespace RandomApi.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
-	// [Authorize]
+	[Authorize]
 	public class RandomController : ControllerBase
 	{
 
