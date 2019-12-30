@@ -43,6 +43,9 @@ namespace RandomMVC
 					options.ResponseType = "code";
 
 					options.SaveTokens = true;
+					options.Scope.Add("email");
+					options.Scope.Add("random.api");
+					options.Scope.Add("offline_access");
 				});
 		}
 

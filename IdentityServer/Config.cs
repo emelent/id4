@@ -14,6 +14,7 @@ namespace IdentityServer
 			{
 				new IdentityResources.OpenId(),
 				new IdentityResources.Profile(),
+				new IdentityResources.Email(),
 			};
 		public static IEnumerable<ApiResource> Apis =>
 			new ApiResource[]
@@ -52,8 +53,11 @@ namespace IdentityServer
 						AllowedScopes = new List<string>
 						{
 							IdentityServerConstants.StandardScopes.OpenId,
-							IdentityServerConstants.StandardScopes.Profile
-						}
+							IdentityServerConstants.StandardScopes.Profile,
+							IdentityServerConstants.StandardScopes.Email,
+							"random.api"
+						},
+						AllowOfflineAccess = true
 				}
 			};
 
