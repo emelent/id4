@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using IdentityServer.Services;
 using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +39,7 @@ namespace IdentityServer
 					options.ClientSecret = "RGa3lWvgFy_chGB6L6JM794L";
 				});
 			// not recommended for production - you need to store your key material somewhere secure
+			services.AddTransient<IProfileService, ProfileService>();
 			builder.AddDeveloperSigningCredential();
 		}
 
