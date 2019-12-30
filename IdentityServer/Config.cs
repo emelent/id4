@@ -15,6 +15,17 @@ namespace IdentityServer
 				new IdentityResources.OpenId(),
 				new IdentityResources.Profile(),
 				new IdentityResources.Email(),
+				new IdentityResources.Phone(),
+				new IdentityResources.Address(),
+				new IdentityResource()
+				{
+					Name = "gaming",
+						DisplayName = "Game Information",
+						Description = "Displays your gaming information.",
+						UserClaims = {
+							"favourite_game"
+						}
+				}
 			};
 		public static IEnumerable<ApiResource> Apis =>
 			new ApiResource[]
@@ -28,11 +39,21 @@ namespace IdentityServer
 				new Client
 				{
 					ClientId = "random.console",
-						AllowedGrantTypes = GrantTypes.ClientCredentials,
+						AllowedGrantTypes = {
+							GrantType.ClientCredentials,
+							GrantType.ResourceOwnerPassword
+						},
 						ClientSecrets = {
 							new Secret("secret".Sha256())
 						},
-						AllowedScopes = { "random.api" }
+						AllowedScopes = {
+							"random.api",
+							"gaming",
+							IdentityServerConstants.StandardScopes.OpenId,
+							IdentityServerConstants.StandardScopes.Email,
+							IdentityServerConstants.StandardScopes.Profile,
+						},
+						AlwaysIncludeUserClaimsInIdToken = true,
 				},
 				// interactive ASP.NET Core MVC client
 				new Client
