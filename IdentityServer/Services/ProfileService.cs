@@ -25,15 +25,16 @@ namespace IdentityServer.Services
 			// var user = await _userManager.GetUserAsync(context.Subject);
 			var user = _users.FindBySubjectId(context.Subject.GetSubjectId());
 
-			var email = user.Claims.Where(c => c.Type == "email").Select(c => c.Value).Single();
-			var name = user.Claims.Where(c => c.Type == "name").Select(c => c.Value).Single();
-			var claims = new List<Claim>
-			{
-				new Claim("email", email),
-				new Claim("name", name),
-			};
+			// var email = user.Claims.Where(c => c.Type == "email").Select(c => c.Value).Single();
+			// var name = user.Claims.Where(c => c.Type == "name").Select(c => c.Value).Single();
+			// var claims = new List<Claim>
+			// {
+			// 	new Claim("email", email),
+			// 	new Claim("name", name),
+			// };
 
-			context.IssuedClaims.AddRange(claims);
+			// add all claims just to see
+			context.IssuedClaims.AddRange(user.Claims);
 			await Task.Run(() =>
 			{
 
