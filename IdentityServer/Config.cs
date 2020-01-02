@@ -17,6 +17,11 @@ namespace IdentityServer
 				new IdentityResources.Email(),
 				new IdentityResources.Phone(),
 				new IdentityResources.Address(),
+				new IdentityResource(
+					name: "custom.profile",
+					displayName: "Custom profile",
+					claimTypes : new [] { "name", "email", "favourite_game" }
+				),
 				new IdentityResource()
 				{
 					Name = "gaming",
@@ -49,6 +54,7 @@ namespace IdentityServer
 						AllowedScopes = {
 							"random.api",
 							"gaming",
+							"custom.profile",
 							IdentityServerConstants.StandardScopes.OpenId,
 							IdentityServerConstants.StandardScopes.Email,
 							IdentityServerConstants.StandardScopes.Profile,
@@ -62,7 +68,7 @@ namespace IdentityServer
 						ClientSecrets = { new Secret("another secret".Sha256()) },
 
 						AllowedGrantTypes = GrantTypes.Code,
-						RequireConsent = false,
+						RequireConsent = true,
 						RequirePkce = true,
 
 						// where to redirect to after login
@@ -76,7 +82,8 @@ namespace IdentityServer
 							IdentityServerConstants.StandardScopes.OpenId,
 							IdentityServerConstants.StandardScopes.Profile,
 							IdentityServerConstants.StandardScopes.Email,
-							"random.api"
+							"random.api",
+							"custom.profile",
 						},
 						AllowOfflineAccess = true
 				}
