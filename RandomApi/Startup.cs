@@ -55,8 +55,9 @@ namespace RandomApi
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllers();
-			}).UseAuthorization();
+				endpoints.MapControllers()
+					.RequireAuthorization();
+			});
 		}
 	}
 }
