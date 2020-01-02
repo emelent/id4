@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -43,12 +40,20 @@ namespace RandomMVC.Controllers
 			return SignOut("Cookies", "oidc");
 		}
 
+		public IActionResult Login()
+		{
+			return Challenge(new AuthenticationProperties
+			{
+				RedirectUri = "/Home/Index"
+			}, "oidc");
+		}
 		public async Task<IActionResult> CallApi()
 		{
 			var accessToken = await HttpContext.GetTokenAsync("access_token");
 
 			var client = new HttpClient();
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+			client.SetBearerToken(accessToken);
+			// client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 			var content = await client.GetStringAsync("http://localhost:5001/identity");
 
 			ViewBag.Json = JArray.Parse(content).ToString();
