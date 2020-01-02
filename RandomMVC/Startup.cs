@@ -46,6 +46,8 @@ namespace RandomMVC
 					options.Scope.Add("email");
 					options.Scope.Add("random.api");
 					options.Scope.Add("offline_access");
+					options.Scope.Add("openid");
+					options.Scope.Add("custom.profile");
 				});
 		}
 
@@ -75,7 +77,7 @@ namespace RandomMVC
 				endpoints.MapControllerRoute(
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}"
-				).RequireAuthorization();
+				); //.RequireAuthorization();
 			});
 		}
 	}
